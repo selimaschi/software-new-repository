@@ -1,9 +1,9 @@
 from django.db import models
-
 from django.db import models
 from ExpeditionsAPP.models import Expedition
 from EntreprisesAPP.models import Entreprise
 from VehiculesAPP.models import Vehicule
+from django.core.validators import MinValueValidator
 
 
 class Offre(models.Model):
@@ -17,11 +17,11 @@ class Offre(models.Model):
 
     date_proposition = models.DateField( auto_now_add=True)
 
-    expedition = models.ForeignKey(Expedition, on_delete=models.CASCADE)
+    expedition = models.ForeignKey(Expedition, on_delete=models.CASCADE, related_name='offres')
 
-    transporteur = models.ForeignKey(Entreprise,on_delete=models.CASCADE)
+    transporteur = models.ForeignKey(Entreprise,on_delete=models.CASCADE,related_name='offres')
 
-    vehicule = models.ForeignKey(Vehicule,on_delete=models.CASCADE)
+    vehicule = models.ForeignKey(Vehicule,on_delete=models.CASCADE,related_name='offres')
 
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
